@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gradient-llamaindex-cookbook"
+version = "0.1.0"
+description = "Cookbook examples for LlamaIndex integrations with DigitalOcean Gradient"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "DigitalOcean", email = "gradient@digitalocean.com"}
+]
+keywords = ["llamaindex", "rag", "digitalocean", "gradient", "ai", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "llama-index-core>=0.12.0",
+    "llama-index-retrievers-digitalocean-gradientai>=0.1.0",
+    "llama-index-llms-digitalocean-gradientai>=0.1.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+reranking = [
+    "llama-index-postprocessor-cohere-rerank>=0.1.0",
+    "sentence-transformers>=2.2.0",
+]
+eval = [
+    "ragas>=0.1.0",
+]
+all = [
+    "gradient-llamaindex-cookbook[reranking,eval]",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-mock>=3.10.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/digitalocean/gradient-llamaindex-cookbook"
+Documentation = "https://github.com/digitalocean/gradient-llamaindex-cookbook#readme"
+Repository = "https://github.com/digitalocean/gradient-llamaindex-cookbook"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "integration: marks tests as integration tests (require credentials)",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+select = ["E", "F", "I", "N", "W"]
+ignore = ["E501"]
